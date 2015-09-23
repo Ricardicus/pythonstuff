@@ -1,5 +1,4 @@
-# This is a game that the reader probably has played before except its in multiplayer
-# and its in Python (not using PyGame, this is native Tkinter!) for unlimited (can be agrued against) joy!
+# This is a game called Snake but made for multiplay in Python using the native Tkinter library!
 
 # -*- coding: UTF-8 -*- 
 import random
