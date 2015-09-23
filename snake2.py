@@ -301,5 +301,5 @@ def run(rows, cols):
     root.mainloop()  
 
 # run the game!
-if __name__=="main":
+if __name__=="__main__":
     run(50,50)
