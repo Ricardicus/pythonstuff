@@ -1,3 +1,6 @@
+# This is a program that maps a 2d coordinate to one in 3d using some basic math
+# learned in school. It draws a pendulum. Check it out! 
+
 from Tkinter import *
 import math
 
