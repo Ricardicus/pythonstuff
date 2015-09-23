@@ -1,3 +1,6 @@
+# This is a game that the reader probably has played before except its in multiplayer
+# and its in Python (not using PyGame, this is native Tkinter!) for unlimited (can be agrued against) joy!
+
 # -*- coding: UTF-8 -*- 
 import random
 from Tkinter import *
