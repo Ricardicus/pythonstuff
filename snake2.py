@@ -1,4 +1,4 @@
-# This is a game called Snake but made for multiplay in Python using the native Tkinter library!
+# This is a game called Snake but made multiplayer built in Python using the native Tkinter library!
 
 # -*- coding: UTF-8 -*- 
 import random
