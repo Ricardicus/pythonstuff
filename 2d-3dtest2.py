@@ -1,6 +1,7 @@
 from Tkinter import *
 import math
 
+# some global varable initialisations!
 Width = 600.0
 Height = 600.0
 
@@ -16,7 +17,7 @@ theta = 0.0
 radius = 260
 	
 def move(event):
-
+	# using the Left and Right arrows, the dot in the left canvas moves causing the pendulum to move accordingly
 	global theta
 
 	if(event.keysym == "Left"):
@@ -25,6 +26,7 @@ def move(event):
 		theta += -0.05 * math.pi
 
 def draw():
+	# draws the running dot on the left canvas and the pendulum onto the right canvas.
 	global canvas1
 	global canvas2
 	global y
@@ -59,6 +61,7 @@ def draw():
 	o3 = canvas2.create_oval(x1-k,y1-k,x1+k,y1+k,fill="blue")
 	
 def Letstryit(event):
+	# drawing the pendulum (function name stems from eagerness)!
 	global canvas1
 	global canvas2
 	global o1	
@@ -93,63 +96,66 @@ def Letstryit(event):
 	o3 = canvas2.create_oval(x1-k,y1-k,x1+k,y1+k,fill="blue")
 
 def drawingtimeison(event):
+	# wheter or not the drawing should occur, if the left canvas is clicked and held the state is active (true)
 	global drawtime
 	drawtime = True
 
 def timer(canvas1):
+	# the root loop! 
 	if(drawtime):
 		draw()	
 	canvas1.after(20, timer, canvas1)
 
-root = Tk()
+if __name__=="__main__":
+	root = Tk()
 
-canvas1 = Canvas(root, width = Width, height = Height, bg = "blue")
-canvas2 = Canvas(root, width = Width, height = Height, bg = "red")
-canvas1.pack(side = LEFT)
-canvas2.pack(side = LEFT)
-o1 = canvas1.create_oval(0,0,0,0,fill="blue")
-o2 = canvas2.create_oval(0,0,0,0,fill="blue")
-o3 = canvas2.create_oval(0,0,0,0,fill="blue")
-#root.bind("<Button-1>",tryck)
-root.bind("<Key>",move)
-#root.bind("<B1-Motion>",tryck)
-#root.bind("<ButtonRelease-1>",tryck)	
-#root.bind("<B1-Motion>",Letstryit) 
+	canvas1 = Canvas(root, width = Width, height = Height, bg = "blue")
+	canvas2 = Canvas(root, width = Width, height = Height, bg = "red")
+	canvas1.pack(side = LEFT)
+	canvas2.pack(side = LEFT)
+	o1 = canvas1.create_oval(0,0,0,0,fill="blue")
+	o2 = canvas2.create_oval(0,0,0,0,fill="blue")
+	o3 = canvas2.create_oval(0,0,0,0,fill="blue")
+	#root.bind("<Button-1>",tryck)
+	root.bind("<Key>",move)
+	#root.bind("<B1-Motion>",tryck)
+	#root.bind("<ButtonRelease-1>",tryck)	
+	#root.bind("<B1-Motion>",Letstryit) 
 
-n = 20.0
-for i in range(0,int(n)):
-	ps = 2 * math.pi
-	th = i/n * math.pi
-	y2 = Height / 2 + radius * math.cos(th)
-	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)
-	canvas2.create_oval(x2,y2,x2+4,y2+4,fill="blue")
-	ps = math.pi
-	y2 = Height / 2 + radius * math.cos(th)
-	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
-	canvas2.create_oval(x2,y2,x2+4,y2+4,fill="blue")
-	ps = 2 * math.pi
-	th = i/n * math.pi
-	y2 = Height / 2 + 20 * math.cos(th)
-	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)
-	k = 4/1.5 * (1+0.5*math.sin(th+math.pi/4))
-	canvas2.create_oval(x2,y2,x2+k,y2+k,fill="blue")
-	ps = math.pi
-	y2 = Height / 2 + 20 * math.cos(th)
-	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)	
-	k = 4/1.5 * (1+0.5*math.sin(th+math.pi/4))
-	canvas2.create_oval(x2,y2,x2+k,y2+k,fill="blue")
-#	ps = 16/24 * 2 * math.pi	
-#	y2 = Height / 2 + radius * math.cos(th)
-#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
-#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
-#	ps = 4/24 * 2 * math.pi	
-#	y2 = Height / 2 + radius * math.cos(th)
-#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
-#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
-canvas2.create_oval(Width/2-5,Height/2-5,Width/2+5,Height/2+5,fill="blue")
-root.bind("<B1-Motion>",Letstryit)
-root.bind("<ButtonRelease-1>",drawingtimeison)  
-root.title("2d till 3d!")
-timer(canvas1)
-root.mainloop()
+	n = 20.0
+	for i in range(0,int(n)):
+		ps = 2 * math.pi
+		th = i/n * math.pi
+		y2 = Height / 2 + radius * math.cos(th)
+		x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)
+		canvas2.create_oval(x2,y2,x2+4,y2+4,fill="blue")
+		ps = math.pi
+		y2 = Height / 2 + radius * math.cos(th)
+		x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
+		canvas2.create_oval(x2,y2,x2+4,y2+4,fill="blue")
+		ps = 2 * math.pi
+		th = i/n * math.pi
+		y2 = Height / 2 + 20 * math.cos(th)
+		x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)
+		k = 4/1.5 * (1+0.5*math.sin(th+math.pi/4))
+		canvas2.create_oval(x2,y2,x2+k,y2+k,fill="blue")
+		ps = math.pi
+		y2 = Height / 2 + 20 * math.cos(th)
+		x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)	
+		k = 4/1.5 * (1+0.5*math.sin(th+math.pi/4))
+		canvas2.create_oval(x2,y2,x2+k,y2+k,fill="blue")
+	#	ps = 16/24 * 2 * math.pi	
+	#	y2 = Height / 2 + radius * math.cos(th)
+	#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
+	#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
+	#	ps = 4/24 * 2 * math.pi	
+	#	y2 = Height / 2 + radius * math.cos(th)
+	#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
+	#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
+	canvas2.create_oval(Width/2-5,Height/2-5,Width/2+5,Height/2+5,fill="blue")
+	root.bind("<B1-Motion>",Letstryit)
+	root.bind("<ButtonRelease-1>",drawingtimeison)  
+	root.title("2d till 3d!")
+	timer(canvas1)
+	root.mainloop()
 	
