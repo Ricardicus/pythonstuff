@@ -254,9 +254,11 @@ def findSnakeHead(canvas):
     canvas.data["headCol2"] = headCol2
 
 def printInstructions():
+    # game instructions! (in swedish)
     print "Ha det så kul! Tryck 'r' för att restarta spelet."
 
 def init(canvas):
+    # initialise the game!
     printInstructions()
     loadSnakeBoard(canvas)
     canvas.data["inDebugMode"] = False
@@ -269,7 +271,7 @@ def init(canvas):
     redrawAll(canvas)
 
 def run(rows, cols):
-    # create the root and the canvas
+    # create the root and the canvas of the game!
     root = Tk()
     margin = 3
     cellSize = 15
@@ -280,7 +282,7 @@ def run(rows, cols):
     root.resizable(width=0, height=0)
     # Store canvas in root and in canvas itself for callbacks
     root.canvas = canvas.canvas = canvas
-    # Set up canvas data and call init
+    # Setting up data. 
     canvas.data = { }
     canvas.data["margin"] = margin
     canvas.data["cellSize"] = cellSize
@@ -298,4 +300,6 @@ def run(rows, cols):
     # and launch the app
     root.mainloop()  
 
-run(50,50)
+# run the game!
+if __name__=="main":
+    run(50,50)
