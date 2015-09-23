@@ -1,10 +1,11 @@
 # This is a program that maps a 2d coordinate to one in 3d using some basic math
 # learned in school. It draws a pendulum. Check it out! 
 
+# using Tkinter for the GUI
 from Tkinter import *
 import math
 
-# some global varable initialisations!
+# global varables
 Width = 600.0
 Height = 600.0
 
