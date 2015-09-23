@@ -1,3 +1,7 @@
+# This is a program used for sending secrets! 
+# It has got encryption and decrytion and the ability to set a secret shared key
+# to modify the encryption. 
+
 #coding: UTF-8
 from Tkinter import *
 from os import system
