@@ -1,4 +1,4 @@
-﻿# This is a cryptographic program that turns messages into jibberish and jibberish (after encryption) into messages!
+﻿# This is a program used to send secrets!
 # It's implemented in Python2.x and will only run on iOS devices using Python2.x 
 
 #coding: UTF-8
