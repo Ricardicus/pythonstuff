@@ -8,15 +8,11 @@ import math
 # global varables
 Width = 600.0
 Height = 600.0
-
 drawtime = True
-
 x = 0
 y = 0
-
 dx = 0.0
 dy = 0.0
-
 theta = 0.0
 radius = 260
 	
