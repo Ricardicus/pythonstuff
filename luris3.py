@@ -359,7 +359,7 @@ class Krypterafil(tk.Frame):
 		top.pack()
 
 if __name__=="__main__":
-# The call that initialises the varibles of the app and initialises it!
+# The call that initialises the varibles used in the app and the app istelf!
 	message = u''
 
 	v = [u'a',u'b',u'c',u'd',u'e',u'f',u'g',u'h',u'i',u'j',u'k',u'l',u'm',u'n',u'o',u'p',u'q',u'r',u's',u't',u'u',u'v',u'w',u'x',u'y',u'z',u'å',u'ä',u'ö',u'!',u'?',u'1',u'2',u'3',u'0',u'4',u'5',u'6',u'7',u'8',u'9',u'-',u'(',u'A',u'B',u'C',u'D',u'E',u'F',u'G',u'H',u'I',u'J',u'K',u'L',u'M',u'N',u'O',u'P',u'Q',u'R',u'S',u'T',u'U',u'V',u'W',u'X',u'Y',u'Z',u'.',u' ',u'\n',u'Å',u'Ä',u'Ö',u',',u'/',u':',u';',u'&',u'@']
