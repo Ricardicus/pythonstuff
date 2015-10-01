@@ -342,7 +342,7 @@ class Krypterafil(tk.Frame):
 
 		w = tk.Entry(top, text="Skriv det du vill kryptera!",bd=0,selectbackground="blue",fg="black",width=150)
 
-		b1 = tk.Button(top,bd=0,highlightbackground="blue",text="Sätt nyckel",command=setKey)
+		b1 = tk.Button(top,bd=0,highlightbackground="blue",text="Sätt nyckel",command=lambda: setKey(w))
 
 		b2 = tk.Button(bottom,highlightbackground="blue", text="Kryptera en .txt fil med aktuell nyckel!", background = "blue", command=readandcrypt)
 		b3 = tk.Button(bottom,highlightbackground="blue", text="Avläs en .txt fil med aktuell nyckel!", background = "blue", command=readanddecrypt)
