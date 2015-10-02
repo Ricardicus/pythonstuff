@@ -1,7 +1,8 @@
+# -*- coding: UTF-8 -*- 
+
 # This is a Snake game in multiplayer!
 # Runs on a Python2.x interpreter with the Tkinter library installed
 
-# -*- coding: UTF-8 -*- 
 import random
 from Tkinter import *
 
@@ -199,7 +200,7 @@ def drawSnakeCell(canvas, snakeBoard, row, col):
     top = margin + row * cellSize
     bottom = top + cellSize
 #    canvas.create_rectangle(left, top, right, bottom, fill="white")
-    if ((snakeBoard[row][col] > 0) and (snakeBoard[row][col] < 50)):
+    if ((snakeBoard[row][col] > 0) and (snakeBoard[row][col] < 100)):
         # draw part of the "cyan" colored snake
         canvas.create_oval(left, top, right, bottom, fill="cyan")
     elif(snakeBoard[row][col] > 100):
