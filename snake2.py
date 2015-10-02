@@ -214,13 +214,15 @@ def drawSnakeCell(canvas, snakeBoard, row, col):
                            text=str(snakeBoard[row][col]),font=("Helvetica", 14, "bold"))
 
 def loadSnakeBoard(canvas):
+    # setting up the 'core' of the game, the snakeboard,
+    # a 2x2-matrix containg information of what 'objects' to display and where on the screen!
     rows = canvas.data["rows"]
     cols = canvas.data["cols"]
     snakeBoard = [ ]
     for row in range(rows): snakeBoard += [[0] * cols]
     snakeBoard[rows/2][cols/2] = 1
     snakeBoard[rows/2+2][cols/2-1] = 101
-    canvas.data["snakeBoard"] = snakeBoard
+    canvas.data["snakeBoard"] = snakeBoard # storing it accordingly in the data dictionary!
     findSnakeHead(canvas)
     placeFood(canvas)
 
