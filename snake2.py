@@ -1,12 +1,17 @@
+# This is a Snake game in multiplayer!
+# Runs on a Python2.x interpreter with the Tkinter library installed
+
 # -*- coding: UTF-8 -*- 
 import random
 from Tkinter import *
 
 def mousePressed(event):
+    # Mouse event handler
     canvas = event.widget.canvas
     redrawAll(canvas)
 
 def keyPressed(event):
+    # Key event handler!
     canvas = event.widget.canvas
     canvas.data["ignoreNextTimerEvent"] = True # for better timing
     # first process keys that work even if the game is over
@@ -45,8 +50,9 @@ def keyPressed(event):
     redrawAll(canvas)
 
 def moveSnake1(canvas, drow, dcol):
-    # move the snake one step forward in the given direction.
-    canvas.data["snake1Drow"] = drow # store direction for next timer event
+    # Moving the snake drow nbr of rows and dcol nbr of cols in the matrix stored in canvas. 
+    # canvas is storing position information
+    canvas.data["snake1Drow"] = drow # storing direction for the next timer event
     canvas.data["snake1Dcol"] = dcol
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
@@ -58,17 +64,17 @@ def moveSnake1(canvas, drow, dcol):
     newHeadCol = newHeadCol % cols
     newHeadRow = newHeadRow % rows
     if (((snakeBoard[newHeadRow][newHeadCol] > 0) and (snakeBoard[newHeadRow][newHeadCol] < 100)) or (snakeBoard[newHeadRow][newHeadCol] > 100)):
-        # snake ran into someone!
+        # This means that the snake ran into something!
         gameOver(canvas,1 )
     elif(snakeBoard[newHeadRow][newHeadCol] < 0):
-        # eating food!  Yum!
+        # Snake eating food!
         snakeBoard[newHeadRow][newHeadCol] = 1 + snakeBoard[headRow][headCol]
         canvas.data["headRow1"] = newHeadRow
         canvas.data["headCol1"] = newHeadCol
         canvas.data["points1"] += 1
         placeFood(canvas)
     else:
-        # normal move forward (not eating food)
+        # Normal forward move
         snakeBoard[newHeadRow][newHeadCol] = 1 + snakeBoard[headRow][headCol]
         canvas.data["headRow1"] = newHeadRow
         canvas.data["headCol1"] = newHeadCol
@@ -76,8 +82,9 @@ def moveSnake1(canvas, drow, dcol):
 
 
 def moveSnake2(canvas, drow, dcol):
-    # move the snake one step forward in the given direction.
-    canvas.data["snake2Drow"] = drow # store direction for next timer event
+    # Moving the second snake drow nbr of rows and dcol nbr of column in the matrix stored in canvas.
+    # The canvas stores positioning information
+    canvas.data["snake2Drow"] = drow # storing the direction for the next timer event
     canvas.data["snake2Dcol"] = dcol
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
@@ -89,26 +96,25 @@ def moveSnake2(canvas, drow, dcol):
     newHeadCol = newHeadCol % cols
     newHeadRow = newHeadRow % rows
     if (((snakeBoard[newHeadRow][newHeadCol] > 0) and (snakeBoard[newHeadRow][newHeadCol] < 100)) or (snakeBoard[newHeadRow][newHeadCol] > 100)):
-        # snake ran into someone!
+        # Snake ran into someone!
         gameOver(canvas,2)
     elif (snakeBoard[newHeadRow][newHeadCol] < 0):
-        # eating food!  Yum!
+        # Snake ate food!
         snakeBoard[newHeadRow][newHeadCol] = 1 + snakeBoard[headRow][headCol]
         canvas.data["headRow2"] = newHeadRow
         canvas.data["headCol2"] = newHeadCol
         canvas.data["points2"] += 1
         placeFood(canvas)
     else:
-        # normal move forward (not eating food)
+        # Normal move forward
         snakeBoard[newHeadRow][newHeadCol] = 1 + snakeBoard[headRow][headCol]
         canvas.data["headRow2"] = newHeadRow
         canvas.data["headCol2"] = newHeadCol
         removeTail2(canvas)
 
 def removeTail2(canvas):
-    # find every snake cell and subtract 1 from it.  When we're done,
-    # the old tail (which was 1) will become 0, so will not be part of the snake.
-    # So the snake shrinks by 1 value, the tail.
+    # Finding every snake2-cell and substracting one from it. 
+    # This is crucial in making tail, the end, of the snake move! 
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
     cols = len(snakeBoard[0])
@@ -119,9 +125,8 @@ def removeTail2(canvas):
 
 
 def removeTail1(canvas):
-    # find every snake cell and subtract 1 from it.  When we're done,
-    # the old tail (which was 1) will become 0, so will not be part of the snake.
-    # So the snake shrinks by 1 value, the tail.
+    # Finding every snake1-cell and substracting one from it. 
+    # This is crucial in making tail, the end, of the snake move! 
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
     cols = len(snakeBoard[0])
@@ -131,15 +136,17 @@ def removeTail1(canvas):
                 snakeBoard[row][col] -= 1
 
 def gameOver(canvas,who):
+    # The game is over!
     canvas.data["isGameOver"] = True
     canvas.data["whodied"] = who
 
 def timerFired(canvas):
+    # The game loop event trigger!
     ignoreThisTimerEvent = canvas.data["ignoreNextTimerEvent"]
     canvas.data["ignoreNextTimerEvent"] = False
     if ((canvas.data["isGameOver"] == False) and
         (ignoreThisTimerEvent == False)):
-        # only process timerFired if game is not over
+        # Will only process if the game is not over
         drow = canvas.data["snake1Drow"]
         dcol = canvas.data["snake1Dcol"]
         moveSnake1(canvas, drow, dcol)
@@ -147,12 +154,12 @@ def timerFired(canvas):
         dcol = canvas.data["snake2Dcol"]
         moveSnake2(canvas, drow, dcol)
         redrawAll(canvas)
-    # whether or not game is over, call next timerFired
-    # (or we'll never call timerFired again!)
+    # Call if the game is not over!
     delay = 120 # milliseconds
-    canvas.after(delay, timerFired, canvas) # pause, then call timerFired again
+    canvas.after(delay, timerFired, canvas) # The main game-loop!
 
 def redrawAll(canvas):
+    # Drawing everything again! Called by the game loop after snakes have been moved.
     canvas.delete(ALL)
     tx = canvas.data["canvasWidth"]-100
     ty = canvas.data["canvasHeight"] - 100
@@ -174,6 +181,7 @@ def redrawAll(canvas):
             canvas.create_text(cx, cy, text="Vinnare är spelare röd!", font=("Rockwell", 32, "bold"))
 
 def drawSnakeBoard(canvas):
+    # the call for drawing the snakeboard onto the screen!
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
     cols = len(snakeBoard[0])
@@ -182,6 +190,8 @@ def drawSnakeBoard(canvas):
             drawSnakeCell(canvas, snakeBoard, row, col)
 
 def drawSnakeCell(canvas, snakeBoard, row, col):
+    # Drawing cells onto the snakeboard on the screen. 
+    # The content of the snakeboard matrix determines the color drawed.
     margin = canvas.data["margin"]
     cellSize = canvas.data["cellSize"]
     left = margin + col * cellSize
@@ -189,15 +199,15 @@ def drawSnakeCell(canvas, snakeBoard, row, col):
     top = margin + row * cellSize
     bottom = top + cellSize
 #    canvas.create_rectangle(left, top, right, bottom, fill="white")
-    if ((snakeBoard[row][col] > 0) and (snakeBoard[row][col] < 10)):
-        # draw part of the snake body
+    if ((snakeBoard[row][col] > 0) and (snakeBoard[row][col] < 50)):
+        # draw part of the "cyan" colored snake
         canvas.create_oval(left, top, right, bottom, fill="cyan")
     elif(snakeBoard[row][col] > 100):
         canvas.create_oval(left,top,right,bottom,fill="red")
     elif (snakeBoard[row][col] < 0):
-        # draw food
+        # drawing food item
         canvas.create_oval(left, top, right, bottom, fill="green")
-    # for debugging, draw the number in the cell
+    # used when debugging.. draws the number in the current cell of the snakeboard.
     if (canvas.data["inDebugMode"] == True):
         canvas.create_text(left+cellSize/2,top+cellSize/2,
                            text=str(snakeBoard[row][col]),font=("Helvetica", 14, "bold"))
@@ -214,9 +224,7 @@ def loadSnakeBoard(canvas):
     placeFood(canvas)
 
 def placeFood(canvas):
-    # place food (-1) in a random location on the snakeBoard, but
-    # keep picking random locations until we find one that is not
-    # part of the snake!
+    # Placing a food item, represented by -1, onto the snakeboard. 
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
     cols = len(snakeBoard[0])
@@ -228,8 +236,8 @@ def placeFood(canvas):
     snakeBoard[row][col] = -1
 
 def findSnakeHead(canvas):
-    # find where snakeBoard[row][col] is largest, and
-    # store this location in headRow, headCol
+    # finding where to find the head of snake1 and snake2 respectively and 
+    # storing them in the data dictionary contained in canvas.
     snakeBoard = canvas.data["snakeBoard"]
     rows = len(snakeBoard)
     cols = len(snakeBoard[0])
@@ -251,9 +259,11 @@ def findSnakeHead(canvas):
     canvas.data["headCol2"] = headCol2
 
 def printInstructions():
+    # Printing some instructions!
     print "Ha det så kul! Tryck 'r' för att restarta spelet."
 
 def init(canvas):
+    # Initialising the game!
     printInstructions()
     loadSnakeBoard(canvas)
     canvas.data["inDebugMode"] = False
@@ -266,7 +276,7 @@ def init(canvas):
     redrawAll(canvas)
 
 def run(rows, cols):
-    # create the root and the canvas
+    # Creates the root and the canvas!
     root = Tk()
     margin = 3
     cellSize = 15
@@ -275,9 +285,9 @@ def run(rows, cols):
     canvas = Canvas(root, width=canvasWidth, height=canvasHeight)
     canvas.pack()
     root.resizable(width=0, height=0)
-    # Store canvas in root and in canvas itself for callbacks
+    # Stores canvas in root and in itself for callbacks. (Not original idea.. found help online)
     root.canvas = canvas.canvas = canvas
-    # Set up canvas data and call init
+    # Setting up the canvas and the dictionary containg data of the game in canvas.
     canvas.data = { }
     canvas.data["margin"] = margin
     canvas.data["cellSize"] = cellSize
@@ -295,4 +305,5 @@ def run(rows, cols):
     # and launch the app
     root.mainloop()  
 
-run(50,50)
+if __name__=="__main__":
+    run(50,50)
