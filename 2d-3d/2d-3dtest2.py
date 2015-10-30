@@ -37,10 +37,14 @@ def draw():
 	global o1
 	global o2
 	global o3
+	global o4
+	global o5
 
 	canvas1.delete(o1)
 	canvas2.delete(o2)
 	canvas2.delete(o3)
+	canvas2.delete(o4)
+	canvas2.delete(o5)
 
 	dx = 2*math.cos(theta)
 	dy = 2*math.sin(theta)
@@ -53,20 +57,30 @@ def draw():
 	y1 = y
 	theta2 = (x1 / Width) * math.pi
 	psi = (y1 / Height) * 2 * math.pi
+
 	y1 = Height / 2 + radius * math.cos(theta2)
 	x1 = Width / 2 + radius * math.sin(theta2) * math.cos(psi)
+	k1 = 10 * (1+math.cos(psi-math.pi/2))
 
-	k = 10 * (1+math.cos(psi-math.pi/2))
+	y2 = Height / 2 + radius * math.cos(theta2+math.pi/2)
+	x2 = Width / 2 + radius * math.sin(theta2+math.pi/2) * math.cos(psi)
+	k2 = 10 * (1+math.cos(psi-math.pi/4))
+
 	o2 = canvas2.create_line(Width/2,Height/2,x1,y1,width=2.0,smooth = 1,fill="blue")
-	o3 = canvas2.create_oval(x1-k,y1-k,x1+k,y1+k,fill="blue")
+	o3 = canvas2.create_oval(x1-k1,y1-k1,x1+k1,y1+k1,fill="blue")
+
+	o4 = canvas2.create_line(Width/2,Height/2,x2,y2,width=5.0,smooth = 1,fill="blue")
+	o5 = canvas2.create_oval(x2-k2,y2-k2,x2+k2,y2+k2,fill="blue")
 	
 def Letstryit(event):
-	# drawing the pendulum (function name stems from eagerness)!
+	# drawing the pendulum (function name as result of eagerness)!
 	global canvas1
 	global canvas2
 	global o1	
 	global o2
 	global o3
+	global o4
+	global o5
 	global x
 	global y
 	global drawtime
@@ -79,6 +93,9 @@ def Letstryit(event):
 	canvas1.delete(o1)
 	canvas2.delete(o2)
 	canvas2.delete(o3)
+	canvas2.delete(o4)
+	canvas2.delete(o5)
+
 
 	o1 = canvas1.create_oval(x,y,x+10,y+10,fill="red")
 	
@@ -86,14 +103,20 @@ def Letstryit(event):
 	y1 = y
 	theta = (x1 / Width) * math.pi
 	psi = (y1 / Height) * 2 * math.pi
-	radius = 100
+	
 	y1 = Height / 2 + radius * math.cos(theta)
 	x1 = Width / 2 + radius * math.sin(theta) * math.cos(psi)
+	k1 = 10 * (1+math.cos(psi-math.pi/2))
 
-	k = 10 * (1+math.cos(psi-math.pi/2))
+	y2 = Height / 2 + radius * math.cos(theta+math.pi/2)
+	x2 = Width / 2 + radius * math.sin(theta+math.pi/2) * math.cos(psi)
+	k2 = 10 * (1+math.cos(psi+math.pi/4))
 	
 	o2 = canvas2.create_line(Width/2,Height/2,x1,y1,width=5.0,smooth = 1,fill="blue")
-	o3 = canvas2.create_oval(x1-k,y1-k,x1+k,y1+k,fill="blue")
+	o3 = canvas2.create_oval(x1-k1,y1-k1,x1+k1,y1+k1,fill="blue")
+
+	o4 = canvas2.create_line(Width/2,Height/2,x2,y2,width=5.0,smooth = 1,fill="blue")
+	o5 = canvas2.create_oval(x2-k2,y2-k2,x2+k2,y2+k2,fill="blue")
 
 def drawingtimeison(event):
 	# wheter or not the drawing should occur, if the left canvas is clicked and held the state is active (true)
@@ -116,6 +139,8 @@ if __name__=="__main__":
 	o1 = canvas1.create_oval(0,0,0,0,fill="blue")
 	o2 = canvas2.create_oval(0,0,0,0,fill="blue")
 	o3 = canvas2.create_oval(0,0,0,0,fill="blue")
+	o4 = canvas2.create_oval(0,0,0,0,fill="blue")
+	o5 = canvas2.create_oval(0,0,0,0,fill="blue")
 	#root.bind("<Button-1>",tryck)
 	root.bind("<Key>",move)
 	#root.bind("<B1-Motion>",tryck)
@@ -144,14 +169,7 @@ if __name__=="__main__":
 		x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)	
 		k = 4/1.5 * (1+0.5*math.sin(th+math.pi/4))
 		canvas2.create_oval(x2,y2,x2+k,y2+k,fill="blue")
-	#	ps = 16/24 * 2 * math.pi	
-	#	y2 = Height / 2 + radius * math.cos(th)
-	#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
-	#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
-	#	ps = 4/24 * 2 * math.pi	
-	#	y2 = Height / 2 + radius * math.cos(th)
-	#	x2 = Width / 2 + radius * math.sin(th) * math.cos(ps)		 
-	#	canvas2.create_oval(x2,y2,x2+2,y2+2,fill="blue")
+
 	canvas2.create_oval(Width/2-5,Height/2-5,Width/2+5,Height/2+5,fill="blue")
 	root.bind("<B1-Motion>",Letstryit)
 	root.bind("<ButtonRelease-1>",drawingtimeison)  
