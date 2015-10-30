@@ -1,2 +1,2 @@
 # 2d - 3d mapping
-Just displays a cylindrical coordinate system as two parameters change (phi and theta)  
+Displays a cylindrical coordinate systems two axises (a-phi, a-r) as two parameters change (phi, theta)  
