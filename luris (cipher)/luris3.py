@@ -1,9 +1,10 @@
 ﻿# This is a program used to send secrets!
 # It's implemented in Python2.x and will only run on iOS devices using Python2.x 
 
-#coding: UTF-8
+# coding: UTF-8
 
 # The GUI is implemented in Tkinter! (works for python 2.x)
+
 import Tkinter as tk
 
 from os import system
@@ -368,8 +369,8 @@ if __name__=="__main__":
 	b = {}
 
 	for i in range(0,len(v)):
-	
 		b[v[i]] = i
+
 	bfile = {}
 
 	for i in range(0,len(vfile)):
