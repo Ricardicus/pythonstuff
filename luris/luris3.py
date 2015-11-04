@@ -18,29 +18,20 @@ def crypt(entry,title):
 # Encrypting messange retrieved from 'entry' field and displaying it 'title' field
 	
 	global v
-	
 	global b
-	
 	global z
 	
 	message = u''
-	
 	st = unicode(entry.get())
-	
 	a = 0
 	
 	for i in range(0,len(st)):
-		
-		l = b[st[i]]
-		
+		l = b[st[i]]	
 		p = a % len(z)
-		
 		message += v[(l+z[p]) % len(v)]
-		
 		a += 1
 	
 	title.delete(1.0,'end')
-    
 	title.insert('insert',message)
 
 def cryptfile(st):
@@ -49,15 +40,10 @@ def cryptfile(st):
 	message = u''
 	
 	a = 0
-	
 	for i in range(0,len(st)):
-		
 		l = bfile[st[i]]
-		
 		p = a % len(z)
-		
-		message += vfile[(l+z[p]) % len(vfile)]
-		
+		message += vfile[(l+z[p]) % len(vfile)]	
 		a += 1
 
 	title.delete(1.0,'end')
@@ -72,43 +58,29 @@ def decrypt(entry,title,intvar):
 # - only works for iOS machines!!!
 	
 	global v
-	
 	global b
-	
 	global z
-	
 	global message
 	
 	
 	message = u''	
-
 	st = unicode(entry.get())
-	
 	a = 0
 		
 	for i in range(0,len(st)):
-		
 		l = b[st[i]]			
-		
 		p = a % len(z)	
-		
 		message += v[(len(v)*5+l-z[p]) % len(v)]
-		
 		a += 1
 
 	
 	title.delete(1.0,'end')
-    
 	title.insert('insert',message)
     
 	if(intvar.get()):
-        
 		try:
-            
-			system('say '+str(message.encode('UTF-8')))
-        
+			system('say '+str(message.encode('UTF-8')))    
 		except ValueError:
-            
 			print("funkade ej :/")
 
 def decryptfile(st):
@@ -116,17 +88,12 @@ def decryptfile(st):
 	global title
 	
 	message = u''	
-	
 	a = 0
 		
 	for i in range(0,len(st)):
-		
 		l = bfile[st[i]]
-		
 		p = a % len(z)
-		
 		message += vfile[(len(vfile)*5+l-z[p]) % len(vfile)]
-		
 		a += 1
 
 	title.delete(1.0,'end')
@@ -139,11 +106,8 @@ def setKey(entry):
 	global z
 	
 	st = unicode(entry.get())
-	
 	z = []
-	
 	for i in st:
-		
 		z.append(ord(i))
 
 def readandcrypt():
