@@ -1,2 +1,2 @@
 # luris
-a cipher program with support for reading files and outputing them. 
+a cipher program that can also manipulate files. 
