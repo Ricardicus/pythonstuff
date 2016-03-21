@@ -1,4 +1,5 @@
 import math
+from Tkinter import *
 def DFT(v):
 	N = len(v)
 	k_v = []
@@ -19,3 +20,14 @@ def IDFT(v):
 		sum = float("{0:.4f}".format(sum.real)) + 1j*float("{0:.4f}".format(sum.imag))
 		n_v.append(sum/N)
 	return n_v
+def plot(x,y):
+	if(len(x)!=len(y)):
+		print "Sorry, vector lengths must match"
+		return
+	master = Tk()
+	width = 600
+	height = 300
+	w = Canvas(master, width=width, height=height)
+	w.pack()
+	for i in range(len(x)):
+		w.create_rectangle(i*width/len(x),height-y[i]*(height-5)/max(y),(i+1)*width/len(x),height, fill="blue")
