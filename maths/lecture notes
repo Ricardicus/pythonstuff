@@ -1,0 +1,92 @@
+Task1:
+Bisection method: will fail if f(a)f(b)>=0 and should only be applied if there exists a single root between a and b.
+You must somehow know this before hand. 
+Task2:
+fsolve uses a mixture of methods, first iterativly and then Newton. 
+Task3:
+The method is not linear. This is therefore not fpi. The condition lim k->inf. abs(x_k+1 l L)/abs(x_k - L)^q converges if q = 3.
+Newton has q = 2, fpi is q = 1.
+
+Newton x_n+1 = x_n = f(x_n)/f'(x_n)
+x = g(x)
+
+fpi: g(x) = x + a*f(x), where a is a constant. The best contant is -1/f'(x) (Newton)
+
+But there exists even better methods than newton. Haley's method is better-> it was used in Task 2. It is an advanced fixed point iteration. 
+FPI is mostly referred to method with linear convergence. 
+
+In theory, newton is quadratic in an interval [L-e,L+e] where e is a small number. 
+Newton isn't always better than fpi, it depends on the case. But in general it should iterate faster. 
+
+MULTI-DIM Non-linear systems
+
+Norms of matrix, define maimix column or row sum of a matrix
+
+Name		will solve						how																criteria
+- FPI: 		X = G(X) [ X is a vector ]		X_n+1 = G(X_n)													|| D*G || < 1 (D is a jacobian)
+- Newton:	F(X) = 0 [ X is a vector ]		X_n+1 = X_n - (D*F(X_n))*F(X_n) (D is the jacobian derivative)	to many to write
+
+Example: use newtons method with starting guess (1,2) to solve v = u^3
+where the variables u and v are restricted to the unit circle.
+
+v - u^3 = 0
+u^2 + v^2 = 1
+
+Now we have our system that we can run our newton method on:
+	
+>	v - u^3 		= 0
+>	U¨2 + v^2 - 1 	= 0	
+
+DF = 	( df1/du df1/dv ) = ( -3u^2	 1 )
+		( df2/du df2/dv ) = (  2u 	2v )
+
+Newton:
+
+(u) 	= (u) 	- ( 3u^2	1	) ^ -1	* ( v - u^3 )
+(v)n+1 	= (v)n 	  ( 2u 		2v	) 		* ( v^2 + u ^2 - 1)
+
+
+EXAMPLE CODE
+from __future__ import division
+from scipy import *
+from scipy import linalg
+from matplotlib.pyplot import *
+
+def F(x):
+	u = x[0]
+	v = x[1]
+	F1 = v-u**3
+	F2 = u**2 + v**2 - 1
+	return [F1,F2]
+
+def invJ(x):
+	u = x[0]
+	v = x[1]
+	Jac = [[-3*u**2,1],[2*u,2*v]]
+	return linalg.inv(Jac)	
+
+def newton(u):
+
+	for n in range(10):
+	# newtons method
+		u = u - dot(invJ(u),F(u)) 
+	root = u
+	return root
+
+u  = array([1,2])
+root = newton(u)
+print root
+
+Running FPI on these types of problem is NOT RECOMMENDED. It will not be as good as newton and in many cases diverge. 
+
+
+
+
+
+
+
+
+
+
+
+

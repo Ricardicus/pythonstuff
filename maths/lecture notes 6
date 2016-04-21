@@ -1,0 +1,102 @@
+Given data (xi,yi) i = 0, ..., n
+Find a polynomial P_n in P^n space (polynomials of max degree n)
+such that Pn(x_i) = y_i
+It's called interpolation
+
+P^n linear space (vector)
+p in P^n, p(n) = sum(i: beta_i*b_i(x))
+Kinds of basis?
+-Vanderman or monomial basis
+-b_i(x) = x^i
+Beta_i = "classical polynomail coaff" = alpha_i
+
+To find the coefficients we have to solve a linear system
+( x_0^n ... 1) (a_n) = (y0)
+( . . . . . .) (...)   (..)
+( x_n^n ... 1) (a_0)   (yn)
+
+* Lagange basis
+
+P^n 						R^n+1
+(n+1-dimensional space)
+l_i(x) <------------------> ei = (0,1,0) , the 1 <--- i
+The polynomial which interpolate this data l_i(x)
+
+l_i(x_j) = 	{ 0 i != j	
+			{ 1 i == j
+
+p_n(x) = sum(i: (1 or 0) * l_i(x))
+p_n(x_j) = sum(i: ( 1 or 0 )*l_i(x_j)) = ? * l_j(x_j) = y_j
+   												^
+   												1
+p_n(x_j) = y_j * l_j(x_j)
+p_n(x) = sum(i: y_i*l_i(x))
+
+Lagrange basis
+	l_i = product(j: 0->n & j!=i,(x - x_j) / (x_i - x_j))	
+	l_i(x_i) = product(j: 0->n & j!=i, ( x_i - x_j ) / (x_i - x_j) = 1 )
+
+P_n(x) = sum(i: 0->n, y_i * l_i(x))
+
+where y_i is coefficient = measurement data
+
+* inner product, scalar product
+* interpolation error
+
+def(v,w)	 v @ w
+R^n sum(i: v_i*w_i)
+||v||^2 = sum(i: v_i^2) = (v,v) -> inner product
+
+Good lecture -> Gilbert Strang Linear Algebra MIT -> apple lecture
+
+R^n+1 -> P^n
+	  -> C[a,b]
+
+Definition: Let V be a linear space and consider a function V*V  -> R
+														   (v,w) -> r
+If it has properties ti is called inner product:
+
+* (v,v) >= 0 and (v,v) == 0 <==> v = 0
+* (a*v,w) = a*(v,w)
+* (v,w) = (w,v)
+* (v+w,z) = (v,z) + (w,z)
+
+Positive bilinear form
+
+Examples:
+
+* R^n : classical dot product
+	(v,w) = sum(i: v_i*w_i)
+* P^n : given n+1 points x_i, p and q are polynomials 
+	(p,q) = sum(i:p(x_i)*q(x_i))
+* P^n, given infinte ammout of points and an interval [a,b]
+	(p,q) = integral(a,b, p(x)*q(x)dx)
+
+Definitions: 
+	v,w in linear space V are called orthogonal if (v,w) = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

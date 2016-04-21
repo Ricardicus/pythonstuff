@@ -1,0 +1,102 @@
+Today: Interpolation, Condition number (briefly)
+
+Interpolation
+- Very useful and important
+
+Newtons method -> find zero of functions in all dimensions
+
+
+Measure (time)	Value (CO2 concentration)
+0 				|	70 
+1				|	120
+45				|	150
+..				|	..
+..				|   ..
+90				|	500
+
+Plot in python 
+
+conc.
+
+^
+|           .
+|          .  
+|    .  .
+|   . . 
+| .
+-------------> time
+
+Get p(x_i) = y_i function i=0,1,2,3...
+This is called interpolation. 
+Banks -> sell stocks, follow curve to get the "trend" of the stock market.
+Use functions to get values between. 
+Every measurement is expensive. That is the use of interpolation. 
+You want the function derived from the data. 
+
+There are different types of interpolations.
+							use:
+Polynomial interpolation --------> Computing intergrals (quadrature)
+						 --------> Describe distinct data in a continual way 
+P(x) = a_n*x^n + a_n-1*x^2 + ... + a_0
+
+Why are we interesed in polynomials? They are very fascinating. 
+They can describe continuous functions by finite numbers. 
+Sinus and cosines are derived from polynomials (mac-laurin).
+Finite constants can describe infinite ammout of data (continuous function).
+The ammount of constants, n, is a finite number that can describe an infinite ammount of data. 
+The finiteness of the data is whats so unique with polynomials. 
+x^i -> monomial
+p(x) = a_n*x^n + .. + a_0 -> polynomial
+
+P^n Space of all polynomials of degree up to n. 
+Vectors can be describe with respective scalars for the vectors in the basis. 
+But the scalars are useless if the basis is not also defined. 
+Number of basis elements is called a dimension. 
+
+Basis of P^n {x^0,x^1,...,x^n} monomial basis.
+P(x) = SIGMA_i a_i*x^i , coefficiant times basis element ==> Linear combination of coefficent times basis element. 
+
+The basis element is the monomials. 
+P^2 = span ({ x^0, x^1, x^2 })
+		{x^0, x^1, x^2, 2x^2} -> Linearly dependent.  
+
+Basis of P^n is linearly independent if all basis have different power. 
+Input data: x/y-table (measurements) 
+Outdata: Polunomial coefficients, a_n, a_n-1, ... , a_0 coefficiants of the monomials. 
+
+Interpolation conditions:
+p(x_i) = y_i, i= 0,...,n
+
+a_n*x_0^n + a_n-1*x_o^n-1 + ... + a_0 = y_0
+a_n*x_1^n + a_n-1*x_1^n-1 + ... + a_0 = y_1
+.
+.
+.
+n_n*x_n^n + a_n-1*x_n^n-1 + ... + a_0 = y_n
+
+ 	 |
+ 	 |
+ 	 |
+	\ /
+	 '
+(    ) * ( a_n, ... , a_0)^T = ( y0, ... , y_n) ----> Linear algebra
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

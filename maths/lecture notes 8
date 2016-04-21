@@ -1,0 +1,112 @@
+Splines are generally preferred over polynomial interpolation.
+It avoids Runge's phenomenon. For each interval between data points a polynomial is constructed conforming to the right conditions. 
+Ex: 
+S(x) = sum(i 0 -> m-1, s_i(x))
+The connections between splines at data points are called knots. 
+The concavity has to agree. 
+S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i
+4m coeffictions.
+4m - 2 conditions. 
+
+Ax =  b, where x is a vector containing sigma values 1 to m-1 where m is the number of splines. 
+^  ^  ^
+known given
+   |
+   unknown
+
+sigma_i = s''_i
+
+d_i = y_i
+b_i = sigma_i / 2
+a_i = (sigma_i+1 - sigma_i)/(6*h)
+c_i = (y_i+1 - y_i)/h - h*(2*sigma_i + sigma_i+1)/6
+
+Assuming equi distant data points. 
+
+The minimality property of splines
+
+Thm: Let s belong to U (spline space) satisfying natural boundary conditions (s_0 = s_m = 0)
+then ||s''||_2 <= ||f''||_2 \^/ f (= U
+Two norm of s'' is less than two norm of f'' for all f in U
+
+def ||f||_2 = sqrt( integral(f^2 * dx) )
+"energy"
+
+The good thing about b-splines:
+local data changes -> local calculations
+
+B-splines -> Recursive setup of equations. 
+
+B-splines: 
+The important property of B-splines is its local property.
+S(x) = sum(i 1 -> m+3, d_i*N_i,4(x))
+where sum(i 1 -> m+3, N_i,4(x)) = 1
+
+the d_i are called de-Boor pts. 
+
+Def: The functions N_i,4 i = 1, ... , 4 + m + 3 - k
+are defined recursively as follows:
+
+N_i,1(x) = { 1 if x in [epsilon_i, epsilon_i+1]
+           { 0 oterwise
+
+are called B-splines and 
+N_i,k(x) = (x - epsilon_i) / (epsilon_i+k-1 - epsilon_i) * N_i,k + (epsilon_i+k - x) / (epsilon_i+k - epsilon_i+1 ) * N_i+1,k-1
+
+^
+|
+|(N_1,1) N(_2,1)
+1______ ________
+| 
+*------1--------2-->         
+
+^     (N_3,2)
+|   (N_2,2)
+1(N_1,2)
+| /\/\/\
+|/ /\/\ \
+*-1-2-3-4--------->
+
+^  (N_1,3)
+|     _
+|   (   )
+| (       )
+|(         )
+*----------3-->
+
+And N_1,4 is more cubic. 
+
+N_i,k -> k data points underneath them. The integral over N is always 1. 
+
+N-functions represent our basis.
+
+If one data point is changed, only the N-functions that contains the data point in their definition set
+will be affected. This is why B-splines have a local property.
+
+The blue things -> de-Boor points
+The control polygon -> great for graphic design, their are smooth. 
+The blue dots multiply the basis so that the spline matches the data. 
+
+For a cubic spline basis -> you need 5 grid points. 
+Grid points are added so that basis functions on tbe end points in the interval can be adjusted.
+Create a knot vector with repeating the end points:
+(000 0 1 2 3 4 5 555)
+
+It is a fix you have to do on the boundaries. 
+This is needed to interpolate the end points. 
+
+--- NUMERICAL INTEGRATION ---
+
+Example: Trapezoidal rule
+
+integrate( x: a->b, f(x) ) = sum(k: 0->N, w_k * f(x_k) )
+IDEA: Approximate area under the curve: {	 - 	Newton-Cotes
+											 -  Composite formula
+											 -  Romberg itegration ( not going to discuss )
+											 -  Adaptive Integration ( no going to discuss )
+											 -  Gaussian Quadrature
+
+						   
+
+
+

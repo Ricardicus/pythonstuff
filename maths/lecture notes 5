@@ -1,0 +1,22 @@
+Rep. Assignment 2
+Diagonally dominant matrices -> Iterative schemes will converge
+Gaussian methods such as LU-factorisation will give an exakt answer.
+
+Interpolation
+Extrapolation
+Fitting
+
+n+1 pts there exists a unique polynomial of degree n!
+There are an inifite ammout of solutions for n+1 pts in degree n+1 and beyond. 
+One method for doing this is the Vandermonde method. 
+Another method is called Lagrange method.
+
+Lagrange method: 
+Let p_n(x) = a_0 + a_1 * x + a_2 * x^2 + ... + a_n * x^n
+Lagrange polynomial: p_n(x) = sum(i: y_i * L_i(x))
+Where L_i(x) = product(j not i: (x - x_j)/(x_i - x_j)) =>
+=  (x-x0)(x-x1)...(x-xi-1)(x-xi+1))...(x-x_n) / (xi-x0)(xi-x1)...(xi-xi-1)(xi-xi+1)...(x-xn)
+
+Example: Given the data points (-1,-7),(1,7),(2,-4),(5,35)
+Construct the Lagrange interpolating polynomial through this data. Use it to approximate f(3).
+
