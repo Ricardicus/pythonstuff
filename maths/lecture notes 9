@@ -46,5 +46,31 @@ integral(x: x0->x2, f(x)) = f(x1)2h + f''(x1)h^3/3 + f''''(ep)h^5/60
 														  error
 This is not a formula since it contains derivatives. This is not numerically correct. 
 
+We need to compute the derivatives:
 
+f'(x1) = (f(x1) - f(x0))/(x1-x0)
+f'(x2) = (f(x2) - f(x1))/(x2-x1)
+
+f''(x1) = (f'(x2) - f'(x1))/(x2-x1) = ((f(x2) - f(x1))/(x2-x1) - (f(x1) - f(x0))/(x1-x0)) / (x2 - x1)
+
+Let f=x2-x1=x1-x0 
+=> f''(x1) = (f(x2) - 2f(x1) + f(x0))/h^2 
+
+=> integral(x: x0->x2, f(x)) 	= 2hf(x1) + h/3(f(x2) - 2f(x1) + f(x0)) + f''''(ep)h^5/60
+								= h/3(f(x2) + 4f(x1) + f(x0)) + f''''(ep)h^5/60
+																      ^
+																    error
+The above is called simpson's 3-p rule. 
+
+Example: Apply the trapezoidal rule to approximate the are under the curve f(x) = sqrt(x) between 1<=x<=7
+		t = (sqrt(7) - sqrt(1)) / 2 = 6/2*(sqrt(7)+1)
+		error = -1/4*ep^(-3/2)*1/12 <= -1/48*6^3 = 36/8 = 4.5
+
+Simpson's
+
+A approx= 3/3[ sqrt(7) + 4sqrt(4) + sqrt(1) ] = sqrt(7) + 8 + 1 = 11.646
+error = -15/16 ep^(-7/2)*3^5/60 <= 15/16*3^5/60 = 3^5/64 apprx 3.8
+
+the order of simpsons's method is in the order of 4 ( error proportional to the fourth derivative, no error for cubic functions )
+the order of trapezoidal method is in the order of 2 ( ---||---, works only without error for linear functions )
 

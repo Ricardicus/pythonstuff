@@ -1,0 +1,59 @@
+Def: The order of quadrature is given by the power if h in the error term.  (USA)
+For example if the error term that contains the highest order is h^n then the quadrature is of the order n.  (USA) -> In europe -> the highster order of derivative is the order! 
+Note: The quadrature is therefore exact for polynomials of order n-1
+
+Terminology: 
+
+Quadrature = Intefration numerically
+Open newton = cotes
+Closed newton = cores
+									formula		error
+Midpoint integral(x:x-1>x1, f(x)) = 2hf(x0) + h^3/3f''(ep)
+(OPEN -> End points not included in the formula)
+Trapezoidal integral(x:x0>x1, f(x)) = h/2[f(x0) + f(x1)] - h^3/12f''(ep)
+(CLOSED -> end points included in the formula )
+Simpson's
+(CLOSED) integral(x:x0>x2, f(x)) = h/3[f(x0) + 4f(x1) + f(x2)] - h^5/90f''''(ep)
+Simpson's 3/8
+(CLOSED) integral(x:x0>x3, f(x)) = 3h/8[f(x0) + 3f(x1) + 3f(x2) + f(x3)] - 3h^5/80f''''(ep)
+HIGHER ORDER RULE
+(OPEN)   integral(x:x0>x4, f(x)) = 5h/4[11f(x0) + f(x1) + f(x2) + 11f(x3)] - 95h^5/144f''''(ep)
+
+Composite quadratures
+
+Composite trapezoidal:
+integral(x: a->b, f(x)) = h/2[f(x0) + 2*sum(i: 1->n-1, f(x_i)) + f(x_n) ] - (b-a)/12*h^2*f''(ep)
+
+Composite Simpson:
+integral(x: a->b, f(x)) = h/3[y0 + y2n + 4 sum(i: 1->n, y2i-1) + 2sum(i: 1->n-1, y2i)] - (b-a)/180h^4f''''(ep)
+
+Composite -> Divide algorithm in each subinterval. In 3 point simpson, 3 points at every subinterval is needed to compute the composite simpson. 
+
+Composite midpoint
+
+integral(x: a->b, f(x)) = h*sum(i: 1->n, f(omega_i) ) + (b-1)/24*h^2*f''(ep)
+
+h = (b-a)/n, and omega_i is the midpoint of each subinterval.
+
+Example:
+Estimate the area for the x(x) = cos(x) between 0 <= x <= pi using composite trapezoidal and 4 intervals
+
+h = pi/4
+
+A(x) ~= h/2 * ( cos(0) + cos(pi/4) + cos(pi/4) + cos(pi/2) + cos(pi/2) + cos(3pi/4) + cos(3pi/4) + cos(pi) ) = 0
+
+Example: Compute n so that the midpoint rule error will not exceed 0.001 for f(x) = cos(x) in 0 <= x <= pi
+
+We know that the error is abs(pi/24*h^2*f''(ep)) = abs(pi/24*h^2*(-cos(ep))) <= pi/24*h^2 < 0.001 where h=pi/4 =>
+so we have:
+
+pi/24*h^2pi^2/n^2 < 0.001 => n > sqrt(n^3 / 0.024) ~= 35.5 => n >= 36
+
+
+
+
+
+
+
+
+
