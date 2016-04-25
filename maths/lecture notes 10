@@ -31,7 +31,7 @@ Composite -> Divide algorithm in each subinterval. In 3 point simpson, 3 points 
 
 Composite midpoint
 
-integral(x: a->b, f(x)) = h*sum(i: 1->n, f(omega_i) ) + (b-1)/24*h^2*f''(ep)
+integral(x: a->b, f(x)) = h*sum(i: 1->n, f(omega_i) ) + (b-a)/24*h^2*f''(ep)
 
 h = (b-a)/n, and omega_i is the midpoint of each subinterval.
 

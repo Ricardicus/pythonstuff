@@ -28,7 +28,7 @@ integral( x: x0->x1, p(x) ) = h/2(y0 + y1) + f''(ep)/12[2(x1^3-x0^3) - 3(x0+x1)(
 			 ^			  ^
 		trapezoidal		error
 
-Derive z 3-pt Quadrature, assuming a continous function f(x)
+Derive z 3-pt Quadrature, assuming a continous function f(x) using Taylor expansion
 (x0,y0), (x1,y1), (x2,y2)
 
 f(x) = f(x1) + f'(x1)(x-x1) + f''(x1)/2! * (x-x1)^2 + f'''(x1)/3!*(x-x1)^3 + f''''(ep)/4!*(x-x1)^4
@@ -62,7 +62,7 @@ Let f=x2-x1=x1-x0
 																    error
 The above is called simpson's 3-p rule. 
 
-Example: Apply the trapezoidal rule to approximate the are under the curve f(x) = sqrt(x) between 1<=x<=7
+Example: Apply the trapezoidal rule to approximate the area under the curve f(x) = sqrt(x) between 1<=x<=7
 		t = (sqrt(7) - sqrt(1)) / 2 = 6/2*(sqrt(7)+1)
 		error = -1/4*ep^(-3/2)*1/12 <= -1/48*6^3 = 36/8 = 4.5
 
