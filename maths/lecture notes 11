@@ -1,0 +1,121 @@
+In order to minimise the error, composite quadratures decreases the increment size.
+Def: q is called the order of the method. 
+q = 2 for the trapezoidal rule, q = 4 for Simpson's rule. 
+This method is exact for polynomials up to degree q-1. 
+For higher order methods larger step sizes h give the same accuracy as small step sizes for lower order methods.
+Thm: Suppose the following quadrature for n+1 points:
+
+integral(x:a->b, f(x)) ~= w0f(x0) + w1f(x1) + ... + wnf(xn)
+
+Then the Newon-Cotes are exact according to the rule:
+If n is even then the quadrature is exact up to polynomial of degree n+1.
+If n is odd then the quadrature is exact up to polynomial of degree n. 
+
+Examples:
+
+Method 			Index of n+1 points				Exact
+
+Midpoint			 n=0 - even					1st degree, x-1 (example)
+Trapezoid 			 n=1 - odd					1st degree, x + 3 (example)
+Simpsons			 n=2 - even                 3rd degree, x^3-9x^2+5 (example)
+Simpson's 3/8 Rule 	 n=3 - odd    				3rd degree, x^3 - 9x
+
+Main two steps to derive error of these formulas: Taylor expand and then integrate. 
+Use chebyshev points to interpolate -> reduces the error, equidistant points give rise to runge's phenomenon
+
+Gaussian Quadratures are the best when it comes to computing numerical integrals. 
+They reduce the errors and are very accurate. 
+
+Based on non-equidistant points:
+
+- More realistic (in terms of data)
+- Produce more accurate approximations
+
+integral(x:a->b, f(x)) = w0f(x0) + w1f(x1) + ... + wnf(xn)
+
+Method can be used for either:
+- Given nodes x0, x1, ..., xn: construct a quadrature formula
+- (More general) find both the nodes and the weights w0, w1, ..., wn for the quadrature. 
+
+Example: 
+
+Construct a quadrature formula to approximate the integral under the function
+f(x) in the interval [1,3] using the nodes x0 = 1, x1 = 3:
+
+integral(x: 1->3, f(x)) ~= w0f(1) + w1f(3)
+
+Let f(x) = 1: [ 2 = w0 + w1 ]
+
+Let f(x) = x: 4 = w0 + 3w1
+
+We now have two equations and two unknowns: 
+
+w0 	+	 w1 	= 2
+w0 	+	 3w1 	= 4
+
+-> w1 = 1 -> w0 = 1
+
+now we have a quadrature formula: 
+
+integral(x: 1->3, f(x)) = f(1) + f(3), tested on contant and linear functions, it will be exact for them. 
+
+Let f(x) = x^2
+	then the quadrature formula will probably have an error.
+
+Checking gives: [x^3/3]{3}{1} = 10 <=> 26/3 =/= 10, its not exact anymore. 
+This quadrature is not a Gaussian Quadrature. 
+
+Gaussian Quadratures:
+
+A true Gaussian Quadrature will be exact up to polynomials of degree 2n - 1 if n points are used. 
+It has twice the accuracy than Newton Cotes. 
+
+Legendre polynomials:
+
+x-> 231/16*x^6 - 315/16*x^4 + 105/16*x - 5/16
+
+* pn(x) = 1/(2^n*n!) d^n/(dx)^n * (x^2-1)^n
+
+* pn(x) = is a polynomial of degree n
+
+* integral(x: -1->2, pn(x) * p(x)) = 0 if p(x) is degree n-1 or less. 
+
+Gaussian quadratures:
+
+A true gaussian quadrature will be exact up to polynomials of degree 2n - 1 if n points are used:
+1) Solve the nth-degree Legendre polynomials to obtain the n roots. These n roots are you quadrature nodes: x0,x1,...,xn.
+2) Use the "Method" = method of undetermined coefficients to obtain the weights: w0, w1, ..., wn. 
+
+Example:
+Obtain a Gaussian quadrature of the form integral(x:-1->1, f(x)) ~= w0f(x0) + w1f(x1)
+Let f(x) = 1: 	=> 2 = w0 + w1
+Let f(x) = x:	=> 0 = w0x0 + w1x1
+Let f(x) = x^2: => 2/3 = 20x0^2 + w1x1^2
+Let f(x) = x^3: => 0 = w0x0^3 + w1x1^3
+
+w0 = 1
+w1 = 1
+x0 = -sqrt(3)/3	
+x1 = sqrt(3)/3
+
+=> this gives us the method. 
+
+integral(x:-1->1, f(x)) ~= 1*f(-sqrt(3)/3) + 1 * f(sqrt(3)/3)
+p3(x) = 3/2x^3 + 9x^2 - 27x + 5
+
+integral(x:a->b, f(x)) = integral(x:-1->1 (b-a)/2*f(((b-a)x + (b+a))/2)) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
