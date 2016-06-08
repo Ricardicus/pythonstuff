@@ -96,9 +96,9 @@ xvals = arange(0,6,0.01)
 plot(x,y,'bo')
 
 plot(xvals,[cubsplineval(coeff, x, xval) for xval in xvals], 'r')
-#title("Spline of data")
-#legend(["Data knots","Spline function"])
-#show()
+title("Spline of data")
+legend(["Data knots","Spline function"])
+show()
 # b) 
 
 xi = [0,0,0]

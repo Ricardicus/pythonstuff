@@ -77,9 +77,9 @@ Iterative
 
 Ax = b
 0 = -Ax + b
-Q^-1 * Q = Q ^-1 (-Ax + Qx + b)
-x = Q^-1Ax + Ox + Q^-1*b
+Q^-1 * Qx = Q ^-1 (-Ax + Qx + b)
+x = Q^-1Ax + Ix + Q^-1*b
 x = (I - Q^-1*A)x + Q^-1*b
-x_n+1 = G(x_n) + C
+x_n+1 = G(x_n)	 + C
 
 where the spectra radius of G is less than one (next time)

@@ -80,6 +80,33 @@ TASK 4
 # b) on paper
 
 # c) 
+def window(a, b, x):
+	if x < b and x >= a:
+		return 1
+	return 0
 
+def N02(x):
+	return (1-x)*window(0,1,x)
+
+def N12(x):
+	return x*window(0,1,x) + (2-x)*window(1,2,x)
+
+def N22(x):
+	return (x-1)*window(1,2,x) + (3-x)*window(2,3,x)
+
+def N32(x):
+	return (x-2)*window(2,3,x)
+
+xvals = arange(0,3, 0.01)
+plot(xvals, [N02(x) for x in xvals], 'r', xvals, [N12(x) for x in xvals], 'b', xvals, [N22(x) for x in xvals], 'g', xvals, [N32(x) for x in xvals], 'k')
+legend(["N_02(x)", "N_12(x)","N_22(x)", "N_32(x)"])
+title("B-spline basis polynomials")
+show()
+
+# estimation of areas
+print("Area under N02: ", three_point_composite_gauss(N02,10,0,3))
+print("Area under N12: ", three_point_composite_gauss(N12,10,0,3))
+print("Area under N22: ", three_point_composite_gauss(N22,10,0,3))
+print("Area under N32: ", three_point_composite_gauss(N32,10,0,3))
 
 

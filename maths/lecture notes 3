@@ -24,7 +24,7 @@ and Q^-1*b = C
 
 x = Gx + C
 
-If Q = D then => Jacobi method
+If Q = D then => Jacobi methodq 
 If Q = I then => Richardson
 if Q = L+D    => Gauss-Seidel
 

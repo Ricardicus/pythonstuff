@@ -15,7 +15,7 @@ Conditions:
 (1) s_i(x_i) = y_i
 (2) s_m-1(s_m) = y_m
 (3) s_i(x_i+1) = s_i+1(x_i+1)
-(4) d/dx ( s_i (x_i) ) = d/dt ( s_i+1(x_i+1) )
+(4) d/dx ( s_i (x_i+1) ) = d/dt ( s_i+1(x_i+1) )
 (5) d^2/(dx^2) ( s_i(x_i+1) ) = d^2/(dx^2) ( s_i+1(x_i+1) )
 
 -------> 4m - 2 equations need to be solved. 
